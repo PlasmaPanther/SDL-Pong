@@ -1,5 +1,5 @@
 # SDL-Pong
-Pong written in C++ and SDL2 Has a simple state machine that manages states and a very simple AI that you can play against.
+Pong written in C++ and SDL2. Has a simple state machine that manages game states and a very simple AI that you can play against.
 
 Font used: https://www.dafont.com/moonrising.font
 
