@@ -11,18 +11,13 @@ public:
 	void Render();
 	void Update();
 
-	static SDL_Rect& GetAIPaddleRect();
-	static void SetAIScore(int val);
-	static int GetAIScore();
+	static Shape2D& GetAIPaddleCollider();
 
 private:
 
-	Shape2D AiPaddle;
+	static inline Shape2D m_AIPaddleCollider;
 
-	static SDL_Rect AIPaddle_Rect;
-	Vector2 ai_velocity;
-
-	static int ai_score;
+	Vector2 m_AiVelocity;
 
 };
 

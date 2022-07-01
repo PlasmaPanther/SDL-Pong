@@ -1,61 +1,47 @@
 #include "AIPaddle.h"
 #include "Ball.h"
 
-SDL_Rect AIPaddle::AIPaddle_Rect;
-int AIPaddle::ai_score;
-
 void AIPaddle::Place() {
 	
-	AiPaddle.PlaceRect(Vector2(755, 300), 15, 60);
-	AIPaddle_Rect = AiPaddle.GetRect();
+	m_AIPaddleCollider.PlaceRect(Vector2(755, 300), 15, 60);
 
-	ai_velocity.x = 0;
-	ai_velocity.y = -8;
+	m_AiVelocity.x = 0;
+	m_AiVelocity.y = -8;
 
-	ai_score = 0;
 }
 
 void AIPaddle::Render() {
-	AiPaddle.DrawRect(255, 255, 255, 255);
+	m_AIPaddleCollider.DrawRect(255, 255, 255, 255);
 }
 
 void AIPaddle::Update() {
-	SDL_Rect tmp_ball = Ball::GetBall();
+	SDL_FRect BallCollider = Ball::GetBallCollider();
 
 	//Boundary check
-	if (AIPaddle_Rect.y <= 0) {
-		AIPaddle_Rect.y = 0;
+	if (m_AIPaddleCollider.GetRect().y <= 0) {
+		m_AIPaddleCollider.GetRect().y = 0;
 	}
-	if (AIPaddle_Rect.y + AIPaddle_Rect.h >= 600) {
-		AIPaddle_Rect.y = 600 - AIPaddle_Rect.h;
+
+	if (m_AIPaddleCollider.GetRect().y + m_AIPaddleCollider.GetRect().h >= 600) {
+		m_AIPaddleCollider.GetRect().y = 600 - m_AIPaddleCollider.GetRect().h;
 	}
 
 	//Determine when the AI starts moving based on the ball X pos; increase value for easier AI; 650 and higher is easiest
 	//also ball has to be in front of the ai paddle
-	if (tmp_ball.x >= 450 && tmp_ball.x + tmp_ball.w <= AIPaddle_Rect.x) {
+	if (BallCollider.x >= 450 && BallCollider.x + BallCollider.w <= m_AIPaddleCollider.GetRect().x) {
 
-		if (tmp_ball.y < AIPaddle_Rect.y + AIPaddle_Rect.h / 2) { //if ball y is lower than the center of the paddle
-			ai_velocity.y = -8; //move accordingly
-			AiPaddle.MoveRect(ai_velocity);
+		if (BallCollider.y < m_AIPaddleCollider.GetRect().y + m_AIPaddleCollider.GetRect().h / 2) { //if ball y is lower than the center of the paddle
+			m_AiVelocity.y = -8; //move accordingly
+			m_AIPaddleCollider.MoveRect(m_AiVelocity);
 		}
 
-		if (tmp_ball.y + tmp_ball.h > AIPaddle_Rect.y + AIPaddle_Rect.h / 2) { //if ball y is higher than the center of the paddle
-			ai_velocity.y = 8;
-			AiPaddle.MoveRect(ai_velocity);
+		if (BallCollider.y + BallCollider.h > m_AIPaddleCollider.GetRect().y + m_AIPaddleCollider.GetRect().h / 2) { //if ball y is higher than the center of the paddle
+			m_AiVelocity.y = 8;
+			m_AIPaddleCollider.MoveRect(m_AiVelocity);
 		}
 	}
-
-	AIPaddle_Rect = AiPaddle.GetRect(); //Keep track of ai position
 }
 
-SDL_Rect& AIPaddle::GetAIPaddleRect() {
-	return AIPaddle_Rect;
-}
-
-void AIPaddle::SetAIScore(int val) {
-	ai_score = val;
-}
-
-int AIPaddle::GetAIScore() {
-	return ai_score;
+Shape2D& AIPaddle::GetAIPaddleCollider() {
+	return m_AIPaddleCollider;
 }

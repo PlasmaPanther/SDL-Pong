@@ -30,7 +30,7 @@ Font::~Font() {
 	TTF_Quit();
 }
 
-void Font::Load(std::string fontname, uint32_t size, std::string text, SDL_Color color) {
+void Font::Load(const std::string& fontname, uint32_t size, const std::string& text, SDL_Color color) {
 	
 	std::string fontpath = "Resources/Fonts/" + fontname;
 
@@ -49,7 +49,7 @@ void Font::Load(std::string fontname, uint32_t size, std::string text, SDL_Color
 	SDL_free(&fontpath); //frees the returned pointer from SDL_GetBasePath()
 }
 
-void Font::LoadToText(std::string fontname, uint32_t size, int val, SDL_Color color) {
+void Font::LoadToText(const std::string& fontname, uint32_t size, int val, SDL_Color color) {
 
 	std::string val_to_str = std::to_string(val);
 
@@ -69,7 +69,7 @@ void Font::DrawText(int x, int y) {
 	}
 }
 
-void Font::ChangeText(std::string text, SDL_Color color) {
+void Font::ChangeText(const std::string& text, SDL_Color color) {
 
 	SDL_DestroyTexture(tex);
 	tex = nullptr;

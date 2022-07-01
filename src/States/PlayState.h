@@ -19,13 +19,23 @@ private:
 
 	static PlayState s_Instance;
 
-	PlayerPaddle Player;
-	AIPaddle AI;
-	Ball Ball;
-	Shape2D Line;
+	PlayerPaddle m_Player;
+	AIPaddle m_AI;
+	Ball m_Ball;
+	Shape2D m_Line;
 
-	Font PressEnterKey;
-	Font PressEscKey;
+	Font m_PressEnterKey;
+	Font m_PressEscKey;
+
+	Font m_PlayerScoreText;
+	Font m_AiScoreText;
+
+	Font m_AiVictory;
+	Font m_PlayerVictory;
+
+	int m_PlayerScore;
+	int m_AiScore;
+	bool m_Victory;
 
 };
 

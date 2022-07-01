@@ -25,8 +25,6 @@ private:
 
 	static bool m_Running;
 
-	const float FPS = 60.0f;
-
 	Application();
 	~Application();
 };

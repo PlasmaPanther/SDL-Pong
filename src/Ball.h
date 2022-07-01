@@ -16,32 +16,17 @@ public:
 	void ResetPosition();
 	
 	void Reset();
-	void Clean();
 
-	static SDL_Rect& GetBall();
-	static bool GetVictory();
+	static SDL_FRect& GetBallCollider();
 
 private:
 
-	Shape2D m_Ball;
+	static inline Shape2D m_BallCollider;
 
-	static inline SDL_Rect ball;
-	static inline bool victory;
+	static inline SDL_FRect m_BallColliderRect;
 
-	Vector2 starting_position;
-	Vector2 ball_velocity;
-
-	int player_score;
-	int ai_score;
-
-	bool player_victory;
-	bool ai_victory;
-
-	Font player_scoreText;
-	Font ai_scoreText;
-
-	Font PlayerVictoryText;
-	Font AIVictoryText;
+	Vector2 m_StartingPosition;
+	Vector2 m_BallVelocity;
 
 };
 

@@ -11,14 +11,11 @@ public:
 	void Render();
 	void Update();
 
-	static SDL_Rect& GetPlayerPaddle();
-	static void SetPlayerScore(int val);
-	static int GetPlayerScore();
+	static Shape2D& GetPlayerPaddleCollider();
 
 private:
-	static SDL_Rect PlayerRect;
-	Shape2D Player;
-	static int player_score;
+
+	static inline Shape2D m_PlayerCollider;
 
 };
 
