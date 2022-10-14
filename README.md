@@ -10,7 +10,7 @@ Arrow UP or W key - To move UP
 
 Arrow DOWN or S key - To move Down
 
-#Other
+# Other
 
 Youtube Video with gameplay:
 
