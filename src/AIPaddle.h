@@ -11,11 +11,9 @@ public:
 	void Render();
 	void Update();
 
-	static Shape2D& GetAIPaddleCollider();
-
 private:
 
-	static inline Shape2D m_AIPaddleCollider;
+	Shape2D m_AIPaddle;
 
 	Vector2 m_AiVelocity;
 

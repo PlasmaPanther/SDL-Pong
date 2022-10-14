@@ -5,28 +5,22 @@
 class Object2D
 {
 public:
-	Object2D(float x = 0.0f, float y = 0.0f);
-	~Object2D() = default;
+	Object2D();
+	virtual ~Object2D() = default;
 
-	void Move(Vector2 _vec);
-	void MoveAnimated(Vector2 _vec);
+	virtual void Move(Vector2 _vec) = 0;
 
-	bool CheckCollision(SDL_Rect* recta, SDL_Rect* rectb);
-	
-	SDL_Rect* GetRect();
-	SDL_Rect* GetAnimatedRect();
+	void SetVelocity(Vector2 _vel);
+	Vector2 GetVelocity();
 
-	void Event(const SDL_Event& e);
-	void animatedEvent(const SDL_Event& e);
+	SDL_FRect& GetRect();
 
 protected:
 
-	SDL_Rect animated_object_destRect, animated_object_srcRect;
-	SDL_Rect object_rectSrc, object_rect;
+	SDL_FRect m_DestRect;
+	SDL_Rect m_SrcRect;
 
-private:
-
-	Vector2 _Vector2;
+	Vector2 m_Velocity;
 
 };
 

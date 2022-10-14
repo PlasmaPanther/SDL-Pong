@@ -1,6 +1,7 @@
 #include "PlayState.h"
 #include "../Input.h"
 #include "../Application.h"
+#include "../CollisionManager.h"
 
 PlayState PlayState::s_Instance;
 
@@ -33,29 +34,31 @@ void PlayState::Render() {
 	m_AI.Render();
 	m_Ball.Render();
 
-	m_Line.DrawLine(Vector2(400, 0), Vector2(400, 600), Colors::WHITE);
+	m_Line.PlaceLine(Vector2(400, 0), Vector2(400, 600), Colors::WHITE);
 
-	m_PlayerScoreText.DrawText(250, 30);
-	m_AiScoreText.DrawText(550, 30);
+	m_PlayerScoreText.Render(Vector2(250, 30));
+	m_AiScoreText.Render(Vector2(550, 30));
 
 	if (m_PlayerScore >= 5) {
-		m_PlayerVictory.DrawText(100, 330);
+		m_PlayerVictory.Render(Vector2(100, 330));
 	}
 
 	if (m_AiScore >= 5) {
-		m_AiVictory.DrawText(450, 330);
+		m_AiVictory.Render(Vector2(450, 330));
 	}
 }
 
 void PlayState::Update() {
 
-	if (m_Ball.GetBallCollider().x <= 0) {
+	SDL_FRect ballCollider = CollisionManager::GetPrimitiveRectCollider("ball");
+
+	if (ballCollider.x <= 0) {
 		m_AiScore++;
 		m_AiScoreText.ChangeToText(m_AiScore, Colors::WHITE);
 		m_Ball.ResetPosition();
 	}
 
-	if (m_Ball.GetBallCollider().x + m_Ball.GetBallCollider().w >= 800) {
+	if (ballCollider.x + ballCollider.w >= 800) {
 		m_PlayerScore++;
 		m_PlayerScoreText.ChangeToText(m_PlayerScore, Colors::WHITE);
 		m_Ball.ResetPosition();
@@ -63,14 +66,14 @@ void PlayState::Update() {
 
 	if (!m_Victory) { //if no one has claimed victory everything is moving and getting updated
 		                     //if victory is claimed however eveything freezes
+		m_Ball.Update();
 		m_Player.Update();
 		m_AI.Update();
-		m_Ball.Update();
 	}
 	else {
 		
-		m_PressEnterKey.DrawText(140, 200);
-		m_PressEscKey.DrawText(235, 400);
+		m_PressEnterKey.Render(Vector2(140, 200));
+		m_PressEscKey.Render(Vector2(235, 400));
 
 		if (Input::Keydown(SDL_SCANCODE_RETURN)) { //and doesn't move until the enter key is pressed
 

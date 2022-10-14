@@ -5,6 +5,7 @@
 class Application
 {
 public:
+
 	static Application* Instance();
 	void DestroyInstance();
 	
@@ -17,7 +18,7 @@ public:
 private:
 	static Application* s_Instance;
 	
-	static SDL_Event Event;
+	static SDL_Event s_Event;
 
 	Graphics* m_Graphics;
 

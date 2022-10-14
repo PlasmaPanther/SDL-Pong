@@ -22,6 +22,7 @@
     <ClInclude Include="src\AIPaddle.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Ball.h" />
+    <ClInclude Include="src\CollisionManager.h" />
     <ClInclude Include="src\Font.h" />
     <ClInclude Include="src\Graphics.h" />
     <ClInclude Include="src\Input.h" />
@@ -33,11 +34,13 @@
     <ClInclude Include="src\States\PlayState.h" />
     <ClInclude Include="src\States\SplashMenu.h" />
     <ClInclude Include="src\States\StateMachine.h" />
+    <ClInclude Include="src\TimerModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AIPaddle.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Ball.cpp" />
+    <ClCompile Include="src\CollisionManager.cpp" />
     <ClCompile Include="src\Font.cpp" />
     <ClCompile Include="src\Graphics.cpp" />
     <ClCompile Include="src\Input.cpp" />
@@ -48,6 +51,7 @@
     <ClCompile Include="src\States\PlayState.cpp" />
     <ClCompile Include="src\States\SplashMenu.cpp" />
     <ClCompile Include="src\States\StateMachine.cpp" />
+    <ClCompile Include="src\TimerModule.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

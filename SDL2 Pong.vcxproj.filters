@@ -57,6 +57,12 @@
     <ClInclude Include="src\Shape2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\CollisionManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TimerModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\States\PlayState.cpp">
@@ -96,6 +102,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Shape2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CollisionManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TimerModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

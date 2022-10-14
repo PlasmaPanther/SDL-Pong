@@ -17,13 +17,9 @@ public:
 	
 	void Reset();
 
-	static SDL_FRect& GetBallCollider();
-
 private:
 
-	static inline Shape2D m_BallCollider;
-
-	static inline SDL_FRect m_BallColliderRect;
+	Shape2D m_Ball;
 
 	Vector2 m_StartingPosition;
 	Vector2 m_BallVelocity;

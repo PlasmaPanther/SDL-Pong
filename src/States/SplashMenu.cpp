@@ -18,9 +18,9 @@ bool SplashMenu::onEnter() {
 
 void SplashMenu::Render() {
 
-	Title.DrawText(310, 200);
-	PressEnter.DrawText(250, 300);
-	PressEsc.DrawText(270, 350);
+	Title.Render(Vector2(310, 200));
+	PressEnter.Render(Vector2(250, 300));
+	PressEsc.Render(Vector2(270, 350));
 
 }
 

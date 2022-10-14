@@ -11,11 +11,11 @@ public:
 	void Render();
 	void Update();
 
-	static Shape2D& GetPlayerPaddleCollider();
+	Shape2D& GetPlayerPaddleCollider();
 
 private:
 
-	static inline Shape2D m_PlayerCollider;
+	Shape2D m_Player;
 
 };
 

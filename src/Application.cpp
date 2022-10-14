@@ -1,9 +1,11 @@
 #include "Application.h"
 #include "Input.h"
 #include "States/SplashMenu.h"
+#include "CollisionManager.h"
+#include "TimerModule.h"
 
 Application* Application::s_Instance = nullptr;
-SDL_Event Application::Event;
+SDL_Event Application::s_Event;
 bool Application::m_Running;
 
 Application* Application::Instance() {
@@ -22,6 +24,8 @@ Application::Application() {
 	if (!m_Graphics->Initialized()) {
 		m_Running = false;
 	}
+
+	TimerModule::UpdateDelta();
 
 	_StateMachine.addState(SplashMenu::GetInstance());
 }
@@ -42,18 +46,21 @@ void Application::DestroyInstance() {
 void Application::MainLoop() {
 	while (m_Running)
 	{
-		while (SDL_PollEvent(&Event) != 0) {
 
-			if (Event.type == SDL_QUIT) {
+		TimerModule::UpdateDelta();
+
+		while (SDL_PollEvent(&s_Event) != 0) {
+
+			if (s_Event.type == SDL_QUIT) {
 				m_Running = false;
 			}
 			
-			switch (Event.window.event) //This switch statement prevents a massive memory leak when minimizing the window
+			switch (s_Event.window.event) //This switch statement prevents a massive memory leak when minimizing the window
 			{                           //Reduces CPU and GPU usage to 0% but pauses everything until the window is restored
 			case SDL_WINDOWEVENT_MINIMIZED:
-				while (SDL_WaitEvent(&Event))
+				while (SDL_WaitEvent(&s_Event))
 				{
-					if (Event.window.event == SDL_WINDOWEVENT_RESTORED)
+					if (s_Event.window.event == SDL_WINDOWEVENT_RESTORED)
 					{
 						break;
 					}
@@ -63,8 +70,9 @@ void Application::MainLoop() {
 			break;
 		}
 
-		Input::InputUpdate();
-		Input::MouseUpdate(Event);
+		Input::InputUpdate(s_Event);
+		CollisionManager::Update();
+
 
 		m_Graphics->Update();
 		_StateMachine.Update();
@@ -86,5 +94,5 @@ void Application::ShutDown() {
 }
 
 SDL_Event Application::GetEvent() {
-	return Event;
+	return s_Event;
 }

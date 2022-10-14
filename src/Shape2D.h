@@ -1,6 +1,7 @@
 #pragma once
 #include "Graphics.h"
 #include "Math.h"
+#include "Object2D.h"
 
 struct Circle
 {
@@ -9,43 +10,35 @@ struct Circle
 
 };
 
-class Shape2D
+class Shape2D : public Object2D
 {
 public:
 	Shape2D();
 	~Shape2D() = default;
 
-	SDL_FRect PlaceRect(Vector2 _pos, float width, float height);
-	void DrawRect(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+	//Places circle
+	void Place(Vector2 _pos, float _radius);
 
-	void DrawLine(Vector2 _startPos, Vector2 _endPos, SDL_Color color);
-	
-	void PlaceCircle(Vector2 _pos, float radius);
-	void DrawCircle(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+	//Places Rectangle
+	void Place(Vector2 _pos, Vector2 _scale);
 
-	void MoveRect(Vector2 _vel);
-	void MoveCircle(Vector2 _vel);
+	//sp - staring point (x,y), ep - ending point (x, y)
+	void PlaceLine(Vector2 sp, Vector2 ep, SDL_Color color, uint8_t a = 255);
 
-	friend bool RectangleCollision(const Shape2D& recta, const Shape2D& rectb);
-	friend bool CircleCollision(const Shape2D& circlea, const Shape2D& circleb);
-	friend bool CircleToRectCollision(const Shape2D& _circle, const Shape2D& rect);
+	void RenderRect(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255, bool renderFlag = true);
+	void RenderCircle(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255, bool renderFlag = true);
+
+	void Move(Vector2 _vec);
 
 	void Kill();
 
-	void SetSpeed(Vector2 _vel);
-	Vector2 GetSpeed();
-
-	SDL_FRect& GetRect();
-	
 	Circle& GetCircle();
 
 private:
 
-	SDL_FRect m_Rect;
-
 	Circle m_Circle;
 
-	Vector2 _velocity;
+	float m_Radius;
 
 };
 

@@ -1,5 +1,7 @@
-#include "Graphics.h"
 #include <string>
+#include <iostream>
+
+#include "Graphics.h"
 
 Graphics* Graphics::s_Instance = nullptr;
 SDL_Renderer* Graphics::m_Renderer = nullptr;
@@ -26,12 +28,13 @@ Graphics::Graphics() {
 Graphics::~Graphics() {
 	SDL_DestroyWindow(m_Window);
 	m_Window = nullptr;
-	printf("Window destroyed\n");
+	std::cout << "Window destroyed" << std::endl;
 
 	SDL_DestroyRenderer(m_Renderer);
 	m_Renderer = nullptr;
-	printf("Renderer destroyed\n");
+	std::cout << "Renderer destroyed" << std::endl;
 
+	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }
@@ -41,33 +44,30 @@ Graphics::~Graphics() {
 //======================================================
 bool Graphics::Init() {
 	if ((SDL_Init(SDL_INIT_EVERYTHING)) != 0) {
-		printf("SDL Init failed: %s\n", SDL_GetError());
+		std::cout << "SDL_Init Failed!: " << SDL_GetError() << std::endl;
 		return false;
 	}
 
 	uint8_t flags = IMG_INIT_JPG | IMG_INIT_PNG;
 
 	if (!(IMG_Init(flags)) && flags) {
-		printf("Graphic init failed: %s\n", IMG_GetError());
+		std::cout << "Graphic Init Failed!: " <<  IMG_GetError() << std::endl;
 		return false;
 	}
 	
 	m_Window = SDL_CreateWindow("Pong Clone", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_W, WINDOW_H, SDL_WINDOW_SHOWN);
 
 	if (m_Window == nullptr) {
-		printf("Could not create window: %s\n", SDL_GetError());
+		std::cout << "Failed to create window!: " << SDL_GetError() << std::endl;
 		return false;
 	}
 
 	m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	
+
 	if (m_Renderer == nullptr) {
-		printf("Renderer could not be created: %s\n", SDL_GetError());
+		std::cout << "Failed to create renderer!: " << SDL_GetError() << std::endl;
 		return false;
 	}
-
-	SDL_SetWindowMinimumSize(m_Window, m_Min_WindowWidth, m_Min_WindowHeight);
-	SDL_SetRenderDrawBlendMode(m_Renderer, SDL_BLENDMODE_BLEND);
 
 	return true;
 }
