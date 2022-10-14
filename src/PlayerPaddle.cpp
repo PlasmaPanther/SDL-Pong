@@ -16,11 +16,11 @@ void PlayerPaddle::Render() {
 
 void PlayerPaddle::Update() {
 
-	if (Input::Keydown(SDL_SCANCODE_UP)) {
+	if (Input::Keydown(SDL_SCANCODE_UP) || Input::Keydown(SDL_SCANCODE_W)) {
 		m_Player.Move(Vector2(0, -300) * TimerModule::GetDelta());
 	}
 
-	if (Input::Keydown(SDL_SCANCODE_DOWN)) {
+	if (Input::Keydown(SDL_SCANCODE_DOWN) || Input::Keydown(SDL_SCANCODE_S)) {
 		m_Player.Move(Vector2(0, 300) * TimerModule::GetDelta());
 	}
 
